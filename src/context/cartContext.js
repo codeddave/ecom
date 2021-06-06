@@ -43,6 +43,7 @@ class ProductProvider extends Component {
         cartItem.id === product.id
           ? {
               ...cartItem,
+              total: cartItem.total + cartItem.price,
               count: cartItem.count + 1,
             }
           : cartItem
@@ -58,17 +59,16 @@ class ProductProvider extends Component {
     let tempProducts = [...this.state.products];
     const index = tempProducts.indexOf(this.getItem(id));
     const product = tempProducts[index];
-    const existingCartItem = this.state.cart.find(
-      (cartItem) => cartItem.id === product.id
-    );
-    console.log(product);
-    console.log(this.state.cart);
-    const cartt = this.checkCart(product);
-    console.log(cartt);
     product.inCart = true;
 
     const price = product.price;
     product.total = price;
+    const existingCartItem = this.state.cart.find(
+      (cartItem) => cartItem.id === product.id
+    );
+
+    const cartt = this.checkCart(product);
+    console.log(cartt);
 
     this.setState(
       () => {
