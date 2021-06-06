@@ -4,10 +4,11 @@ import "./App.css";
 import Products from "./components/Products/Products";
 import Card from "./components/Card/Card";
 import { useContext } from "react";
-import { ProductConsumer } from "./context/cartContext";
+import { ProductContext } from "./context/cartContext";
 
 function App() {
-  console.log(useContext(ProductConsumer));
+  const prod = useContext(ProductContext);
+  console.log(prod);
   return (
     <>
       <Router>

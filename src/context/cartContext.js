@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import { storeProducts } from "../data";
 
 export const ProductContext = React.createContext();
-alert(storeProducts);
 class ProductProvider extends Component {
   state = {
     products: [],
     cart: [],
-    modalOpen: false,
+    isCartModalOpen: false,
     cartSubTotal: 0,
     cartTax: 0,
     cartTotal: 0,
@@ -33,18 +32,50 @@ class ProductProvider extends Component {
     return product;
   };
 
+  checkCart = (product) => {
+    const existingCartItem = this.state.cart.find(
+      (cartItem) => cartItem.id === product.id
+    );
+    if (existingCartItem) {
+      console.log(existingCartItem);
+
+      return this.state.cart.map((cartItem) =>
+        cartItem.id === product.id
+          ? {
+              ...cartItem,
+              count: cartItem.count + 1,
+            }
+          : cartItem
+      );
+    }
+
+    return {
+      ...product,
+      count: 1,
+    };
+  };
   addToCart = (id) => {
     let tempProducts = [...this.state.products];
     const index = tempProducts.indexOf(this.getItem(id));
     const product = tempProducts[index];
+    const existingCartItem = this.state.cart.find(
+      (cartItem) => cartItem.id === product.id
+    );
+    console.log(product);
+    console.log(this.state.cart);
+    const cartt = this.checkCart(product);
+    console.log(cartt);
     product.inCart = true;
-    product.count = 1;
+
     const price = product.price;
     product.total = price;
 
     this.setState(
       () => {
-        return { products: tempProducts, cart: [...this.state.cart, product] };
+        return {
+          products: tempProducts,
+          cart: !existingCartItem ? [...this.state.cart, cartt] : [...cartt],
+        };
       },
       () => {
         this.addTotals();
@@ -57,7 +88,13 @@ class ProductProvider extends Component {
       return { modalProduct: product, modalOpen: true };
     });
   };
-
+  handleCartModal = () => {
+    this.setState((prevState) => {
+      return {
+        isCartModalOpen: !prevState.isCartModalOpen,
+      };
+    });
+  };
   closeModal = (id) => {
     this.setState(() => {
       return { modalOpen: false };
@@ -165,6 +202,7 @@ class ProductProvider extends Component {
           decrement: this.decrement,
           removeItem: this.removeItem,
           clearCart: this.clearCart,
+          handleCartModal: this.handleCartModal,
         }}
       >
         {this.props.children}
