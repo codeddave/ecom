@@ -8,7 +8,7 @@ function Header() {
   return (
     <div className="flex justify-end pt-4 pr-8 relative">
       <ul className="flex text-lg text-gray-700 items-center">
-        <Link>
+        <Link to="/">
           <li className="pr-3">Home </li>
         </Link>
         <li>
@@ -39,9 +39,9 @@ function Header() {
           {cart.length ? (
             <>
               {cart.map((cartItem) => (
-                <div className="pt-2 flex justify-between">
+                <div className="pt-2 flex justify-between text-sm">
                   <img
-                    className="w-20 h-20 object-cover"
+                    className="w-16 h-16 object-cover"
                     src={cartItem.image}
                     alt="product"
                   />
@@ -53,7 +53,7 @@ function Header() {
                 </div>
               ))}
               <div className="pt-2 flex justify-center">
-                <Link to="/cart">
+                <Link to="/checkout">
                   <button className="bg-gray-600 px-4 text-white py-2 hover:bg-white hover:text-black border hover:shadow  hover:border-black">
                     GO TO CHECKOUT
                   </button>

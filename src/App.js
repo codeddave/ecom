@@ -5,6 +5,7 @@ import Products from "./components/Products/Products";
 import Card from "./components/Card/Card";
 import { useContext } from "react";
 import { ProductContext } from "./context/cartContext";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const prod = useContext(ProductContext);
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Products} />
           <Route exact path="/card" component={Card} />
+          <Route exact path="/checkout" component={Checkout} />
         </Switch>
       </Router>
     </>
