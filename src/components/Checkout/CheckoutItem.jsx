@@ -10,12 +10,12 @@ function CheckoutItem({ cartItem: { price, name, image, total, count } }) {
           alt=""
         />
       </div>
-      <p classname="w-1/5 ">{name}</p>
-      <p classname="w-1/5">
+      <p className="w-1/5 ">{name}</p>
+      <p className="w-1/5">
         {count} x ${price}
       </p>
-      <p classname="w-1/5">Remove</p>
-      <p classname="w-1/5">${total}</p>
+      <p className="w-1/5">Remove</p>
+      <p className="w-1/5">${total}</p>
     </div>
   );
 }
