@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ProductContext } from "../../context/cartContext";
 
-function CheckoutItem({ cartItem: { price, name, image, total, count } }) {
+function CheckoutItem({ cartItem: { price, name, image, total, count, id } }) {
+  const { removeItem } = useContext(ProductContext);
+  const handleRemove = () => {
+    removeItem(id);
+  };
   return (
     <div className="flex w-full justify-between items-center pt-3 border-b text-sm md:text-base text-gray-700">
       <div className="w-1/12">
@@ -10,12 +15,14 @@ function CheckoutItem({ cartItem: { price, name, image, total, count } }) {
           alt=""
         />
       </div>
-      <p className="w-1/5 ">{name}</p>
-      <p className="w-1/5">
+      <p className=" ">{name}</p>
+      <p className="">
         {count} x ${price}
       </p>
-      <p className="w-1/5">Remove</p>
-      <p className="w-1/5">${total}</p>
+      <p onClick={handleRemove} className="">
+        Remove
+      </p>
+      <p className="">${total}</p>
     </div>
   );
 }

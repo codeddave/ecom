@@ -78,6 +78,7 @@ class ProductProvider extends Component {
         };
       },
       () => {
+        localStorage.setItem("cartData", JSON.stringify(this.state));
         this.addTotals();
       }
     );
@@ -164,6 +165,8 @@ class ProductProvider extends Component {
         };
       },
       () => {
+        localStorage.setItem("cartData", JSON.stringify(this.state));
+
         this.addTotals();
       }
     );
@@ -182,21 +185,42 @@ class ProductProvider extends Component {
     );
   };
   addTotals = () => {
-    let subTotal = 0;
-    this.state.cart.map((item) => {
-      subTotal += item.total;
-      const tempTax = subTotal * 0.1;
-      const tax = parseFloat(tempTax.toFixed(2));
-      const total = subTotal + tax;
-      this.setState(() => {
-        return {
-          cartSubTotal: subTotal,
-          cartTax: tax,
-          cartTotal: total,
-        };
+    if (this.state.cart.length) {
+      let subTotal = 0;
+      this.state.cart.map((item) => {
+        subTotal += item.total;
+        const tempTax = subTotal * 0.1;
+        const tax = parseFloat(tempTax.toFixed(2));
+        const total = subTotal + tax;
+        this.setState(
+          () => {
+            return {
+              cartSubTotal: subTotal,
+              cartTax: tax,
+              cartTotal: total,
+            };
+          },
+          () => {
+            localStorage.setItem("cartData", JSON.stringify(this.state));
+          }
+        );
       });
-    });
+    } else {
+      this.setState(
+        () => {
+          return {
+            cartSubTotal: 0,
+            cartTax: 0,
+            cartTotal: 0,
+          };
+        },
+        () => {
+          localStorage.setItem("cartData", JSON.stringify(this.state));
+        }
+      );
+    }
   };
+
   render() {
     return (
       <ProductContext.Provider

@@ -42,7 +42,7 @@ function Pay({ amount }) {
     <div className="mx-auto flex w-3/4 justify-center items-center h-64">
       <form onSubmit={handleSubmit} className="pt-4">
         <input
-          className="w-full border pl-2"
+          className="w-full border pl-2 h-10 outline-none"
           type="email"
           id="email"
           name="email"
@@ -51,7 +51,7 @@ function Pay({ amount }) {
           onChange={handleChange}
         />
         <input
-          className="w-full border pl-2 mt-4"
+          className="w-full border pl-2 mt-4 h-10 outline-none"
           type="text"
           id="phone"
           name="phone"

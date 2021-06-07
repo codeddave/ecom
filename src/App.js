@@ -6,7 +6,8 @@ import Card from "./components/Card/Card";
 import { useContext } from "react";
 import { ProductContext } from "./context/cartContext";
 import Checkout from "./components/Checkout/Checkout";
-import Test from "./components/test/Test";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const prod = useContext(ProductContext);
@@ -19,8 +20,8 @@ function App() {
           <Route exact path="/" component={Products} />
           <Route exact path="/card" component={Card} />
           <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/pay" component={Test} />
         </Switch>
+        <ToastContainer />
       </Router>
     </>
   );

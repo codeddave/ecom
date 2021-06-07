@@ -1,15 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/cartContext";
 import { Link, useLocation } from "react-router-dom";
 
 function Header() {
-  const { handleCartModal, isCartModalOpen, cart, closeCartModal } =
+  const { handleCartModal, isCartModalOpen, closeCartModal } =
     useContext(ProductContext);
   const location = useLocation();
+
+  const [cartData, setCartData] = useState(
+    JSON.parse(localStorage.getItem("cartData"))
+  );
+  useEffect(() => {
+    setCartData(JSON.parse(localStorage.getItem("cartData")));
+  }, [JSON.parse(localStorage.getItem("cartData")).cart.length]);
   useEffect(() => {
     closeCartModal();
   }, [location]);
-
   return (
     <div className="flex justify-end pt-4 pr-8 relative">
       <ul className="flex text-lg text-gray-700 items-center">
@@ -41,9 +47,9 @@ function Header() {
       </ul>
       {isCartModalOpen ? (
         <div className="h-64 w-56 bg-white border absolute top-12 z-20 right-0 px-4 py-4 overflow-y-scroll">
-          {cart.length ? (
+          {cartData?.cart.length ? (
             <>
-              {cart.map((cartItem) => (
+              {cartData?.cart.map((cartItem) => (
                 <div
                   key={cartItem.id}
                   className="pt-2 flex justify-between text-sm"
@@ -69,7 +75,9 @@ function Header() {
               </div>
             </>
           ) : (
-            <p>Your Cart is empty</p>
+            <div className="flex flex-col items-center justify-center">
+              <p className="pt-20">Your Cart is empty</p>
+            </div>
           )}
         </div>
       ) : null}

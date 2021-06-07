@@ -18,7 +18,7 @@ function ProductItem({ image, name, price, id }) {
       </button>
       <div className="flex justify-between text-gray-600 pt-2">
         <p>{name}</p>
-        <p>{price}</p>
+        <p>${price}</p>
       </div>
     </div>
   );
