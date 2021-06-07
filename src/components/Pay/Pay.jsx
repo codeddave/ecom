@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { usePaystackPayment } from "react-paystack";
+import { useHistory } from "react-router";
+import { ProductContext } from "../../context/cartContext";
+import { toast } from "react-toastify";
+
 function Pay({ amount }) {
+  const { clearCart } = useContext(ProductContext);
+  const history = useHistory();
   const [formData, setFormData] = useState({
     email: "",
     phone: "",
   });
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -20,11 +25,12 @@ function Pay({ amount }) {
   };
 
   function onSuccess() {
-    alert("Thanks for doing business with us! Come back soon!!");
-    console.log("herer");
+    toast.success(`Thanks for doing business with us! Come back soon`);
+    history.push("/");
+    clearCart();
   }
   function onClose() {
-    alert("Wait! You need this oil, don't go!!!!");
+    toast.error(`Wait, Don't leave :(`);
   }
   const initializePayment = usePaystackPayment(config);
 

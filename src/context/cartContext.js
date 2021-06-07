@@ -95,6 +95,13 @@ class ProductProvider extends Component {
       };
     });
   };
+  closeCartModal = () => {
+    this.setState(() => {
+      return {
+        isCartModalOpen: false,
+      };
+    });
+  };
   closeModal = (id) => {
     this.setState(() => {
       return { modalOpen: false };
@@ -203,6 +210,7 @@ class ProductProvider extends Component {
           removeItem: this.removeItem,
           clearCart: this.clearCart,
           handleCartModal: this.handleCartModal,
+          closeCartModal: this.closeCartModal,
         }}
       >
         {this.props.children}

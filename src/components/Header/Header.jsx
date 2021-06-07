@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ProductContext } from "../../context/cartContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
-  const { handleCartModal, isCartModalOpen, cart } = useContext(ProductContext);
-  console.log(isCartModalOpen);
+  const { handleCartModal, isCartModalOpen, cart, closeCartModal } =
+    useContext(ProductContext);
+  const location = useLocation();
+  useEffect(() => {
+    closeCartModal();
+  }, [location]);
+
   return (
     <div className="flex justify-end pt-4 pr-8 relative">
       <ul className="flex text-lg text-gray-700 items-center">
