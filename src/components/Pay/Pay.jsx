@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PaystackButton } from "react-paystack";
+import { usePaystackPayment } from "react-paystack";
 function Pay({ amount }) {
   const [formData, setFormData] = useState({
     email: "",
@@ -9,7 +9,7 @@ function Pay({ amount }) {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const componentProps = {
+  const config = {
     email: formData.email,
     amount,
     metadata: {
@@ -17,15 +17,24 @@ function Pay({ amount }) {
     },
     publicKey: process.env.REACT_APP_PAYSTACK,
     text: "Pay Now",
-    onSuccess: () =>
-      alert("Thanks for doing business with us! Come back soon!!"),
-    onClose: () => alert("Wait! You need this oil, don't go!!!!"),
   };
 
-  console.log(formData);
+  function onSuccess() {
+    alert("Thanks for doing business with us! Come back soon!!");
+    console.log("herer");
+  }
+  function onClose() {
+    alert("Wait! You need this oil, don't go!!!!");
+  }
+  const initializePayment = usePaystackPayment(config);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    initializePayment(onSuccess, onClose);
+  };
   return (
     <div className="mx-auto flex w-3/4 justify-center items-center h-64">
-      <form className="pt-4">
+      <form onSubmit={handleSubmit} className="pt-4">
         <input
           className="w-full border pl-2"
           type="email"
@@ -44,7 +53,10 @@ function Pay({ amount }) {
           value={formData.phone}
           onChange={handleChange}
         />
-        <PaystackButton {...componentProps} className="pt-4" />
+        <button type="submit" className="pt-4">
+          {" "}
+          Pay now
+        </button>
       </form>
     </div>
   );
