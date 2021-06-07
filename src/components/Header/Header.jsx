@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/cartContext";
 import { Link, useLocation } from "react-router-dom";
+import Button from "../common/Button/Button";
 
 function Header() {
   const { handleCartModal, isCartModalOpen, closeCartModal } =
@@ -68,9 +69,7 @@ function Header() {
               ))}
               <div className="pt-2 flex justify-center">
                 <Link to="/checkout">
-                  <button className="bg-gray-600 px-4 text-white py-2 hover:bg-white hover:text-black border hover:shadow  hover:border-black">
-                    GO TO CHECKOUT
-                  </button>
+                  <Button extraClasses="text-sm">GO TO CHECKOUT</Button>
                 </Link>
               </div>
             </>

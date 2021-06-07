@@ -3,6 +3,7 @@ import { usePaystackPayment } from "react-paystack";
 import { useHistory } from "react-router";
 import { ProductContext } from "../../context/cartContext";
 import { toast } from "react-toastify";
+import Button from "../common/Button/Button";
 
 function Pay({ amount }) {
   const { clearCart } = useContext(ProductContext);
@@ -59,10 +60,10 @@ function Pay({ amount }) {
           value={formData.phone}
           onChange={handleChange}
         />
-        <button type="submit" className="pt-4">
-          {" "}
-          Pay now
-        </button>
+
+        <Button type="submit" extraClasses="mt-4">
+          PAY NOW
+        </Button>
       </form>
     </div>
   );

@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { ProductContext } from "../../context/cartContext";
+import Button from "../common/Button/Button";
 import Modal from "../Modal/Modal";
 import Pay from "../Pay/Pay";
 import CheckoutItem from "./CheckoutItem";
 
 function Checkout() {
   const history = useHistory();
-  const { cartTotal, removeItem } = useContext(ProductContext);
+  const { removeItem } = useContext(ProductContext);
   const [cartData, setCartData] = useState(
     JSON.parse(localStorage.getItem("cartData"))
   );
@@ -18,7 +19,6 @@ function Checkout() {
     if (cartData.cartTotal === 0 && !cartData.cart.length) history.push("/");
   }, [cartData.cartTotal]);
 
-  console.log(JSON.parse(localStorage.getItem("cartData")).cart.length);
   const [completeTransaction, setCompleteTransaction] = useState(false);
   const closeTransaction = () => {
     setCompleteTransaction(false);
@@ -26,7 +26,7 @@ function Checkout() {
   const openTransaction = () => {
     setCompleteTransaction(true);
   };
-  const amount = cartTotal * 100;
+  const amount = cartData.cartTotal * 100;
   return (
     <>
       <Modal show={completeTransaction} onClose={closeTransaction}>
@@ -51,13 +51,10 @@ function Checkout() {
       </div>
       <div className="flex justify-end  w-2/3  mx-auto pt-12">
         <div className="flex flex-col">
-          <p className="text-right">Total: {cartData.cartTotal}</p>
-          <button
-            onClick={openTransaction}
-            className="bg-gray-700 p-2 text-sm mt-2 text-white"
-          >
+          <p className="text-right">Total: ₦{cartData.cartTotal}</p>
+          <Button onClick={openTransaction} extraClasses="mt-4 text-sm">
             BUY NOW
-          </button>
+          </Button>
         </div>
       </div>
     </>
