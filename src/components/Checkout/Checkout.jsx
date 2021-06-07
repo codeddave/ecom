@@ -1,23 +1,19 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ProductContext } from "../../context/cartContext";
 import Button from "../common/Button/Button";
-import Modal from "../Modal/Modal";
+import { useCartData } from "../hooks/useCartData";
+import Modal from "../common/Modal/Modal";
 import Pay from "../Pay/Pay";
 import CheckoutItem from "./CheckoutItem";
 
 function Checkout() {
   const history = useHistory();
   const { removeItem } = useContext(ProductContext);
-  const [cartData, setCartData] = useState(
-    JSON.parse(localStorage.getItem("cartData"))
-  );
-  useEffect(() => {
-    setCartData(JSON.parse(localStorage.getItem("cartData")));
-  }, [JSON.parse(localStorage.getItem("cartData")).cart.length]);
+  const { cartData } = useCartData();
   useEffect(() => {
     if (cartData.cartTotal === 0 && !cartData.cart.length) history.push("/");
-  }, [cartData.cartTotal]);
+  }, [cartData.cartTotal, history, cartData.cart.length]);
 
   const [completeTransaction, setCompleteTransaction] = useState(false);
   const closeTransaction = () => {

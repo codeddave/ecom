@@ -37,8 +37,6 @@ class ProductProvider extends Component {
       (cartItem) => cartItem.id === product.id
     );
     if (existingCartItem) {
-      console.log(existingCartItem);
-
       return this.state.cart.map((cartItem) =>
         cartItem.id === product.id
           ? {
@@ -68,7 +66,6 @@ class ProductProvider extends Component {
     );
 
     const cartt = this.checkCart(product);
-    console.log(cartt);
 
     this.setState(
       () => {
@@ -187,16 +184,13 @@ class ProductProvider extends Component {
   addTotals = () => {
     if (this.state.cart.length) {
       let subTotal = 0;
-      this.state.cart.map((item) => {
+      this.state.cart.forEach((item) => {
         subTotal += item.total;
-        const tempTax = subTotal * 0.1;
-        const tax = parseFloat(tempTax.toFixed(2));
-        const total = subTotal + tax;
+        const total = subTotal;
         this.setState(
           () => {
             return {
               cartSubTotal: subTotal,
-              cartTax: tax,
               cartTotal: total,
             };
           },
