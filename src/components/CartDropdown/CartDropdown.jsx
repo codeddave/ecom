@@ -12,7 +12,7 @@ function CartDropDown({ cartData }) {
           />
           <div>
             <p>
-              {cartItem.count} x ${cartItem.price}
+              {cartItem.count} x ₦{cartItem.price}
             </p>
           </div>
         </div>
