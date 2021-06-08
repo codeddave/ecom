@@ -6,6 +6,7 @@ import { useCartData } from "../hooks/useCartData";
 import Modal from "../common/Modal/Modal";
 import Pay from "../Pay/Pay";
 import CheckoutItem from "./CheckoutItem";
+import { formatPriceWithCommas } from "../../utils/utils";
 
 function Checkout() {
   const history = useHistory();
@@ -29,7 +30,7 @@ function Checkout() {
         <Pay amount={amount} />
       </Modal>
       <div className="flex flex-col items-center justify-center w-full px-6 md:px-0 md:w-2/3  mx-auto pt-20">
-        <div className="flex w-full justify-between items-center md:pl-6">
+        <div className="flex w-full justify-between items-center md:pl-6 text-sm md:text-base">
           <div>Product</div>
           <div>Name</div>
           <div>Price</div>
@@ -47,7 +48,9 @@ function Checkout() {
       </div>
       <div className="flex justify-end  w-2/3  mx-auto pt-12">
         <div className="flex flex-col">
-          <p className="text-right">Total: ₦{cartData.cartTotal}</p>
+          <p className="text-right">
+            Total: ₦{formatPriceWithCommas(cartData.cartTotal)}
+          </p>
           <Button onClick={openTransaction} extraClasses="mt-4 text-sm">
             BUY NOW
           </Button>

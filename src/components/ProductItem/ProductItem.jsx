@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../../context/cartContext";
-
+import { formatPriceWithCommas } from "../../utils/utils";
 function ProductItem({ image, name, price, id }) {
   const { addToCart } = useContext(ProductContext);
+  const formatedPrice = formatPriceWithCommas(price);
 
   return (
     <div className="h-72 max-w-xs w-3/4 rounded flex flex-col relative">
@@ -17,7 +18,7 @@ function ProductItem({ image, name, price, id }) {
       </button>
       <div className="flex justify-between text-gray-600 pt-2">
         <p>{name}</p>
-        <p>₦{price}</p>
+        <p>₦{formatedPrice}</p>
       </div>
     </div>
   );
