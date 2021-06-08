@@ -42,7 +42,12 @@ export const storeProducts = [
     count: 0,
     total: 0,
   },
-  { id: "6", name: "phone", image: "./images/11pro.jpg", price: 100 },
+  {
+    id: "6",
+    name: "iPhone 7 Plus",
+    image: "./images/iphone7plus.jpg",
+    price: 130000,
+  },
   {
     id: "7",
     name: "iPhone 12",
