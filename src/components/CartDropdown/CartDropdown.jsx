@@ -1,5 +1,4 @@
 import React from "react";
-import { formatPriceWithCommas } from "../../utils/utils";
 
 function CartDropDown({ cartData }) {
   return (
@@ -9,11 +8,11 @@ function CartDropDown({ cartData }) {
           <img
             className="w-16 h-16 object-cover"
             src={cartItem.image}
-            alt={cartItem.name}
+            alt="product"
           />
           <div>
             <p>
-              {cartItem.count} x ₦{formatPriceWithCommas(cartItem.price)}
+              {cartItem.count} x ₦{cartItem.price}
             </p>
           </div>
         </div>
