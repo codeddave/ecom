@@ -1,4 +1,5 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 
 function CartDropDown({ cartData }) {
   return (
@@ -12,7 +13,13 @@ function CartDropDown({ cartData }) {
           />
           <div>
             <p>
-              {cartItem.count} x ₦{cartItem.price}
+              {cartItem.count} x
+              <NumberFormat
+                value={cartItem.price}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"₦"}
+              />
             </p>
           </div>
         </div>

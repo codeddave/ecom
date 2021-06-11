@@ -6,6 +6,7 @@ import { useCartData } from "../hooks/useCartData";
 import Modal from "../common/Modal/Modal";
 import Pay from "../Pay/Pay";
 import CheckoutItem from "./CheckoutItem";
+import NumberFormat from "react-number-format";
 
 function Checkout() {
   const history = useHistory();
@@ -47,7 +48,17 @@ function Checkout() {
       </div>
       <div className="flex justify-end  w-2/3  mx-auto pt-12">
         <div className="flex flex-col">
-          <p className="text-right">Total: ₦{cartData.cartTotal}</p>
+          <div>
+            Total:{" "}
+            <NumberFormat
+              value={cartData.cartTotal}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"₦"}
+              className="text-right"
+            />
+          </div>
+
           <Button onClick={openTransaction} extraClasses="mt-4 text-sm">
             BUY NOW
           </Button>

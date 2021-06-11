@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../../context/cartContext";
 import { DeleteIcon } from "../common/Icons/Icons";
+import NumberFormat from "react-number-format";
 
 function CheckoutItem({ cartItem: { price, name, image, total, count, id } }) {
   const { removeItem } = useContext(ProductContext);
@@ -18,12 +19,23 @@ function CheckoutItem({ cartItem: { price, name, image, total, count, id } }) {
       </div>
       <p>{name}</p>
       <p>
-        {count} x ₦{price}
+        {count} x{" "}
+        <NumberFormat
+          value={price}
+          displayType={"text"}
+          thousandSeparator={true}
+          prefix={"₦"}
+        />
       </p>
       <p onClick={handleRemove}>
         <DeleteIcon />
       </p>
-      <p>₦{total}</p>
+      <NumberFormat
+        value={price}
+        displayType={"text"}
+        thousandSeparator={true}
+        prefix={"₦"}
+      />
     </div>
   );
 }
