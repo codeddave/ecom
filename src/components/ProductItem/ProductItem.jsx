@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../../context/cartContext";
+import NumberFormat from "react-number-format";
 function ProductItem({ image, name, price, id }) {
   const { addToCart } = useContext(ProductContext);
 
@@ -16,7 +17,12 @@ function ProductItem({ image, name, price, id }) {
       </button>
       <div className="flex justify-between text-gray-600 pt-2">
         <p>{name}</p>
-        <p>₦{price}</p>
+        <NumberFormat
+          value={price}
+          displayType={"text"}
+          thousandSeparator={true}
+          prefix={"₦"}
+        />
       </div>
     </div>
   );
